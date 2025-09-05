@@ -1,0 +1,55 @@
+services:
+  # Web Server (Apache + PHP)
+  web:
+    image: php:8.1-apache
+    platform: linux/amd64
+    container_name: boundless_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=boundless_moments_db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+    command: >
+      bash -c "
+      docker-php-ext-install mysqli pdo pdo_mysql &&
+      apache2-foreground
+      "
+
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    platform: linux/amd64
+    container_name: boundless_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: boundless_moments_db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    platform: linux/amd64
+    container_name: boundless_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    depends_on:
+      - db
+
+volumes:
+  db_data:

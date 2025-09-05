@@ -1,0 +1,72 @@
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.code-workspace
+
+# PHP
+*.log
+composer.phar
+/vendor/
+composer.lock
+
+# Database
+*.sql.backup
+*.dump
+
+# Docker
+.dockerignore
+
+
+# Temporary Files
+*.tmp
+*.temp
+
+# Environment Files
+.env
+.env.local
+.env.production
+
+# Session Files
+tmp/
+temp/
+sessions/
+
+# Cache Files
+cache/
+*.cache
+
+# Log Files
+logs/
+*.log
+error.log
+access.log
+
+# Backup Files
+backup/
+*.backup
+*.bak
+
+
+
+# Cookies
+cookies.txt
+
+# Testing
+phpunit.xml
+/tests/coverage/
+
+# Dependencies
+node_modules/
+bower_components/
